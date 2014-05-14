@@ -73,3 +73,17 @@ With track by $index, la directive va réutiliser ces noeuds DOM.
   Hello, i am {{item}}.
 <div>
 ```
+
+-> Demos
+
+-> bindonce
+
+### ng-if vs ng-show
+
+ng-show cache les éléments en CSS - display:none
+	- bindings tjs présent
+ng-if va plus loin, et ne les crée même pas dans le DOM
+	- moins de bindings
+	- crée un scope sur l'enfant
+
+Micro optimisation sauf si vous travaillez sur une liste importante.

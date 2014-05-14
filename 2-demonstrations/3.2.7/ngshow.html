@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../common/bootstrap.min.css">
+</head>
+
+<body ng-app="exampleApp" ng-controller="repeatCtrl">
+
+<h4>ng-repeat simple demo</h4>
+
+<button type="button" 
+      class="btn btn-default"
+      ng-click="refresh()">Actualisation du tableau</button>
+
+<ul>
+  <li ng-repeat="item in items">
+  	<span class="label label-default">{{ item.id }}</span>
+  	<span class="label label-default" ng-show="item.enabled">{{ item.name }}</span>
+  </li>
+</ul>
+
+</body>
+
+<script src="../common/angular.min.js"></script>
+<script src="app.js"></script>
+
+</html>
