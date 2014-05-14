@@ -30,3 +30,46 @@ Liens :
 
 http://updates.html5rocks.com/2012/11/Respond-to-change-with-Object-observe
 http://addyosmani.com/blog/the-future-of-data-binding-is-object-observe/
+
+### $digest & $apply & $$postdigest
+
+Micro optimisation
+
+$apply appelle les watchers dans la chaîne entière du scope + digest sur la fin...
+$digest appelle les watchers dans le scope courant et ses enfants
+
+$$postDigest appelle un callback défini une fois le cycle $digest terminé
+Il permet par ex de MAJ le dom après un dirty checking
+
+$$ === private pour Angular
+
+```javascript
+$scope.$$postDigest(function(){
+  console.log("post Digest");
+});
+```
+
+On préfère alors la méthode $timeout,
+
+```javascript
+$timeout(function(){
+ console.log("post Digest with $timeout");
+},0,false);
+```
+
+### ng-repeat : track by $index, pagination
+
+Par défaut, ng-repeat crée un noeud DOM par élément, et détruit le noeud quand l'item est supprimé.
+With track by $index, la directive va réutiliser ces noeuds DOM.
+
+```javascript
+<div ng-repeat="item in array">
+  Hello, i am {{item}}.
+<div>
+```
+
+```javascript
+<div ng-repeat="item in array track by $index">
+  Hello, i am {{item}}.
+<div>
+```
