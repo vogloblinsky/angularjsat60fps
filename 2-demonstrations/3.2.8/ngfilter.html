@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../common/bootstrap.min.css">
+</head>
+
+<body ng-app="exampleApp" ng-controller="repeatCtrl">
+
+<h4>ng-filter simple demo</h4>
+
+<ul>
+  <li ng-repeat="item in items">
+  	<span class="label label-default">{{ item.name | upper }}</span>
+  </li>
+</ul>
+
+</body>
+
+<script src="../common/angular.min.js"></script>
+<script src="app.js"></script>
+
+</html>

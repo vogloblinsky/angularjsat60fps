@@ -87,3 +87,10 @@ ng-if va plus loin, et ne les crée même pas dans le DOM
 	- crée un scope sur l'enfant
 
 Micro optimisation sauf si vous travaillez sur une liste importante.
+
+### Filtres
+
+Ils sont executés à chaque fin de cycle $digest. Ils doivent donc être très rapides.
+
+A n'appliquer que si nécessaire dans une liste par exemple.
+Ajouter plutôt le resultat du filtre dans la liste avant son affichage.
