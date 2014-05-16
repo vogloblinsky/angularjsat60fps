@@ -76,8 +76,6 @@ With track by $index, la directive va réutiliser ces noeuds DOM.
 
 -> Demos
 
--> bindonce
-
 ### ng-if vs ng-show
 
 ng-show cache les éléments en CSS - display:none
@@ -94,3 +92,38 @@ Ils sont executés à chaque fin de cycle $digest. Ils doivent donc être très rapi
 
 A n'appliquer que si nécessaire dans une liste par exemple.
 Ajouter plutôt le resultat du filtre dans la liste avant son affichage.
+
+### Mono-binding / once
+
+Lors de l'utilisation de {{ }}, Angular crée un watch interne pour démarrer le processus de data-binding.
+Le data-binding est 'très' utile si la donnée change au cours du temps, mais si la donnée est en lecture seule, ce n'est plus utile.
+
+But : allègement des watchers, le cycle de $digest sera plus cours également.
+
+Solution : débrancher le watch une fois la donnée affichée.
+
+https://github.com/tadeuszwojcik/angular-once
+
+Exemple :
+
+```html
+<ul>
+    <li ng-repeat="user in users">
+      <a ng-href="{{ user.profileUrl }}">{{ user.name }}</a>
+    </li>
+</ul>
+```
+
+Sur une liste de 100 élements  : 101 watchers
+
+Onced
+
+```html
+<ul>
+    <li ng-repeat="user in users">
+      <a once-href="user.profileUrl" once-text="user.name"></a>
+    </li>
+</ul>
+```
+
+Sur une liste de 100 élements  : 1 watchers
