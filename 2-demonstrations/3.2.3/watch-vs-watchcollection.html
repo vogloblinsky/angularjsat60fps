@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <title>$watch vs. $watchCollection</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../common/bootstrap.min.css">
+    <style type="text/css">
+      body {
+        padding: 20px;
+      }
+      ul {
+        padding: 0
+      }
+      li {
+        display: inline-block;
+        height: 100px;
+        width: 40px;
+      }
+      span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .5s;
+      }
+      span:hover {
+        -webkit-transform: scale(1.5);
+      }
+
+    </style>
+  </head>
+  <body ng-app="demo" ng-controller="AppController">
+    <h4>$watch vs. $watchCollection demo</h4>
+    <nav>
+      <p>
+        <button class="btn " ng-click="clear()">Vider</button>
+        <button class="btn " ng-click="update()">1) Modifier une couleur</button>
+        <button class="btn " ng-click="add()">2) Ajouter une couleur</button>
+        <button class="btn " ng-click="rebuild()">3) Régénérer</button>
+      </p>
+    </nav>
+    <section>
+      <pre>
+  colors:
+    &#746; color:
+      &#746; value = #ffffff
+      </pre>
+    </section>
+    <section>
+      <h5>$watch equality</h5>
+      <section>
+        <ul>
+          <li ng-repeat="color in watchedTrue">
+            <span style="background-color: {{color.color.value}}"></span>
+          </li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <h5>$watchCollection</h5>
+      <section>
+        <ul>
+          <li ng-repeat="color in watchedCollection">
+            <span style="background-color: {{color.color.value}}"></span>
+          </li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <h5>$watch (référence)</h5>
+      <section>
+        <ul>
+          <li ng-repeat="color in watched">
+            <span style="background-color: {{color.color.value}}"></span>
+          </li>
+        </ul>
+      </section>
+    </section>
+
+    <script src="../common/angular.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
