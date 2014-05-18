@@ -148,6 +148,54 @@ $timeout(function(){
 ```
 
 @@
+### Surveillez votre
+## $watch
+
+```javascript
+scope.$watch(watchExpression, listener, true/false);
+```
+
+* ```watchExpression``` sera exécutée plusieurs fois
+* Deux modes de comparaison
+  * FALSE : (par référence)  rapide
+  * TRUE : (profonde) très très lent !!
+
+@@
+### Préférez
+## $watchCollection
+
+```javascript
+scope.$watchCollection(obj, listener);
+```
+
+* Ajouté en 1.2, utilisé par ```ng-repeat```
+* Un niveau de profondeur
+* Alternative au $watch/true
+
+@@
+### $watch vs. $watchCollection
+
+-> demo
+
+@@
+### $eval, $parse, $interpolate
+@todo wassim
+
+
+@@
+### directives : compile, link
+
+* Pour les directives déclarées dans ```ng-repeat```
+   * ```compile``` est appelée qu'une fois
+   * ```link``` et le constructeur sont appelés à chaque itération
+* ```compile``` est votre ami
+
+@@
+### directives : transclusion
+
+$digest limité au scope de la directive
+
+@@
 ### ng-repeat : track by $index, pagination
 
 Par d�faut, ng-repeat cr�e un noeud DOM par �l�ment, et d�truit le noeud quand l'item est supprim�.
