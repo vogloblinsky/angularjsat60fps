@@ -8,12 +8,14 @@
 
 #### Exemple avec jQuery
 * avant :
+
 ```javascript
 $('.div').find('span').filter('.cls').each(...);
 //...
 $('.div').find('span').animate(...);
 ```
 * après :
+
 ```javascript
 var spans = $('.div').find('span');
 spans.filter('.cls').each(...);
@@ -22,9 +24,10 @@ spans.animate(...);
 ```
 
 @@
-### Insertion dans le DOM
+### Manipulation du DOM
 #### Exemple en Vanilla
 * avant :
+
 ```javascript
 doc.innerHTML = '<ul>';
 arr.forEach(function(prd){
@@ -33,6 +36,7 @@ arr.forEach(function(prd){
 doc.innerHTML += '</ul>';
 ```
 * après :
+
 ```javascript
 var html = '<ul>';
 arr.forEach(function(prd){
@@ -50,9 +54,33 @@ Les sélecteurs universels sont à proscrire
 ```
 
 @@
+### Repaint et reflow
+
+Éviter le reflow et minimiser les repaint
+
+* Redimensionner la fenêtre
+* Changer la police
+* Calculer du ```offsetWidth``` et ```offsetHeight```
+* Modifier des attributs de l'objet ```style```
+* ...
+
+@@
 ### Gestion correcte des évènements
 * Enregistrement/désenregistrement systématique
+
+```javascript
+el.addEventListener('click', fn, false);
+el.removeEventListener('click', fn, false);
+```
 * Délégation d'évenements
+
+```javascript
+ul.addEventListener('click', function(){
+  if( this.nodeType === 'LI'){
+    //...
+  }
+}, false);
+```
 * Attention au mousemove/touchmove
 
 @@
@@ -60,6 +88,8 @@ Les sélecteurs universels sont à proscrire
 * http://moduscreate.com/efficient-dom-and-css/
 * https://developers.google.com/speed/articles/javascript-dom
 * https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Writing_efficient_CSS
+* http://www.stubbornella.org/content/2009/03/27/reflows-repaints-css-performance-making-your-javascript-slow/
+* https://developers.google.com/speed/articles/reflow
 
 @@
 ## SPA AngularJS
