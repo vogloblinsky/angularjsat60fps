@@ -75,8 +75,8 @@ el.removeEventListener('click', fn, false);
 * Délégation d'évenements
 
 ```javascript
-ul.addEventListener('click', function(){
-  if( this.nodeType === 'LI'){
+ul.addEventListener('click', function(e){
+  if( e.target.nodeName === 'LI'){
     //...
   }
 }, false);
