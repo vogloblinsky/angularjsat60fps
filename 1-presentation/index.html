@@ -2,125 +2,179 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
 
-	<title>Angular at 60 fps</title>
+    <title>Angular at 60 fps</title>
 
-	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-	<meta name="author" content="Hakim El Hattab">
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
 
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<link rel="stylesheet" href="css/reveal.min.css">
-	<link rel="stylesheet" href="css/theme/sii.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/sii.css" id="theme">
 
-	<!-- For syntax highlighting -->
-	<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-	<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-	<script>
-	document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-	</script>
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+    document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+    </script>
 
-	<!--[if lt IE 9]>
+    <style type="text/css" media="screen">
+    .authors img.normal {
+        box-shadow: none;
+        border: 0 none;
+        background: none;
+        -webkit-filter: invert(1);
+    }
+    .authors a {
+        font-size: 24px;
+    }
+    .author {
+    	width: 450px;
+    	float: left;
+    }
+    </style>
+
+    <!--[if lt IE 9]>
 	<script src="lib/js/html5shiv.js"></script>
 	<![endif]-->
 </head>
 
 <body>
 
-	<div class="logo-sii">
-		<img src="img/logo-sii.png">
-	</div>
+    <div class="logo-sii">
+        <img src="img/logo-sii.png">
+    </div>
 
-	<div class="reveal">
+    <div class="reveal">
 
-		<!-- Any section element inside of this container is displayed as a slide -->
-		<div class="slides">
-			<section>
-				<h1>AngularJS</h1>
-				<h2>At 60 fps</h2>
-			</section>
-			<section class="authors">
-				<style type="text/css" media="screen">
-					.authors img.normal {
-						box-shadow: none; border: 0 none; background: none; -webkit-filter: invert(1);
-					}
-					.authors a {
-						font-size: 24px;
-					}
-				</style>
-				<span style="font-size: 36px; font-style: normal; font-variant: normal;">Wassim Chegham</span>
-				<p>
-					aka — Maneki Ne<b>kk</b>o
-				</p>
-				<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/wassimchegham/images/347313/me__1_.png" style="width: 151px; height: 151px; max-height: none; max-width: none; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%;">
-				<p>
-					ECMAScript Jedi<br>
-					Technical Lead
-				</p>
-				<div style="text-align: center; position: relative; width: 442px; height: 150px; z-index: 4; left: 300px; top: 0;">
-					<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/wassimchegham/images/358008/github-6-512.png" style="text-align: center; position: absolute; width: 46px; height: 46px; z-index: 8; left: 5px; top: -10px; max-height: none; max-width: none;" class="normal">
-					<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/wassimchegham/images/358014/twitter-256.png" style="max-height: none; max-width: none; position: absolute; width: 45px; height: 45px; z-index: 9; left: 5px; top: 40px;" class="normal">
-					<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/wassimchegham/images/358012/wordpress-4-256.png" style="width: 43px; height: 43px; max-height: none; max-width: none; position: absolute; z-index: 7; left: 5px; top: 90px;" class="normal">
-					<ul style="list-style:none;">
-						<li>
-							<a href="https://github.com/manekinekko">github.com/manekinekko</a>
-						</li>
-						<li>
-							<a href="https://twitter.com/manekinekko">twitter.com/@manekinekko</a>
-						</li>
-						<li>
-							<a href="http://blog.sii-ouest.fr/author/wchegham/">blog.sii-ouest.fr/author/wchegham</a>
-						</li>
-					</ul>
-					</div>
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section>
+                <h1>AngularJS</h1>
+                <h2><i>At 60 fps</i></h2>
+            </section>
+            <section class="authors">
+                <div class="author">
+                	<span style="font-size: 36px; font-style: normal; font-variant: normal;">Wassim Chegham</span>
+		            <p>
+		                aka — Maneki Ne<b>kk</b>o
+		            </p>
+		            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/wassimchegham/images/347313/me__1_.png" style="width: 151px; height: 151px; max-height: none; max-width: none; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%;">
+		            <p>
+		                ECMAScript Jedi
+		                <br>Technical Lead
+		            </p>
+		            <div style="text-align: center; position: relative; width: 442px; height: 150px; z-index: 4; left: 0; top: 0;">
+		                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/wassimchegham/images/358008/github-6-512.png" style="text-align: center; position: absolute; width: 46px; height: 46px; z-index: 8; left: 5px; top: -10px; max-height: none; max-width: none;" class="normal">
+		                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/wassimchegham/images/358014/twitter-256.png" style="max-height: none; max-width: none; position: absolute; width: 45px; height: 45px; z-index: 9; left: 5px; top: 40px;" class="normal">
+		                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/wassimchegham/images/358012/wordpress-4-256.png" style="width: 43px; height: 43px; max-height: none; max-width: none; position: absolute; z-index: 7; left: 5px; top: 90px;" class="normal">
+		                <ul style="list-style:none;">
+		                    <li>
+		                        <a href="https://github.com/manekinekko">github.com/manekinekko</a>
+		                    </li>
+		                    <li>
+		                        <a href="https://twitter.com/manekinekko">twitter.com/@manekinekko</a>
+		                    </li>
+		                    <li>
+		                        <a href="http://blog.sii-ouest.fr/author/wchegham/">blog.sii-ouest.fr/author/wchegham</a>
+		                    </li>
+		                </ul>
+		            </div>
+                </div>
+	            <div class="author">
+                	<span style="font-size: 36px; font-style: normal; font-variant: normal;">Vincent Ogloblinsky</span>
+                	<p>
+		                &nbsp;
+		            </p>
+		            <img src="https://pbs.twimg.com/profile_images/1847781003/Rothko3_copy_400x400.jpg" style="width: 151px; height: 151px; max-height: none; max-width: none; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%;">
+		            <p>
+		            	Javascript addict
+		                <br>Technical Lead
+		            </p>
+		            <div style="text-align: center; position: relative; width: 442px; height: 150px; z-index: 4; left: 0; top: 0;">
+		                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/wassimchegham/images/358014/twitter-256.png" style="max-height: none; max-width: none; position: absolute; width: 45px; height: 45px; z-index: 9; left: 50px; top: -10px;" class="normal">
+		                <ul style="list-style:none;">
+		                    <li>
+		                        <a href="https://twitter.com/manekinekko">twitter.com/@vogloblinsky</a>
+		                    </li>
+		                </ul>
+		            </div>
+                </div>
 
-					</section>
-					<section data-markdown="mds/part-1.md" data-separator="^@@@" data-vertical="^@@"></section>
-					<section data-markdown="mds/part-2.md" data-separator="^@@@" data-vertical="^@@"></section>
-					<section data-markdown="mds/part-3.md" data-separator="^@@@" data-vertical="^@@"></section>
-					<section data-markdown="mds/part-4.md" data-separator="^@@@" data-vertical="^@@"></section>
-				</section>
-			</div>
+            </section>
+						<section data-markdown="mds/part-1.md" data-separator="^@@@" data-vertical="^@@"></section>
+						<section data-markdown="mds/part-2.md" data-separator="^@@@" data-vertical="^@@"></section>
+						<section data-markdown="mds/part-3.md" data-separator="^@@@" data-vertical="^@@"></section>
+						<section data-markdown="mds/part-4.md" data-separator="^@@@" data-vertical="^@@"></section>
+        </div>
 
-		</div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
 
-		<script>
+    <script>
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
 
-		// Full list of configuration options available here:
-		// https://github.com/hakimel/reveal.js#configuration
-		Reveal.initialize({
-			controls: true,
-			progress: true,
-			history: true,
-			center: true,
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-			theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-			transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
 
-			// Parallax scrolling
-			// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-			// parallaxBackgroundSize: '2100px 900px',
+        // Optional libraries used to extend on reveal.js
+        dependencies: [{
+            src: 'lib/js/classList.js',
+            condition: function() {
+                return !document.body.classList;
+            }
+        }, {
+            src: 'plugin/markdown/marked.js',
+            condition: function() {
+                return !!document.querySelector('[data-markdown]');
+            }
+        }, {
+            src: 'plugin/markdown/markdown.js',
+            condition: function() {
+                return !!document.querySelector('[data-markdown]');
+            }
+        }, {
+            src: 'plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+                hljs.initHighlightingOnLoad();
+            }
+        }, {
+            src: 'plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+                return !!document.body.classList;
+            }
+        }, {
+            src: 'plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+                return !!document.body.classList;
+            }
+        }]
+    });
+    </script>
 
-			// Optional libraries used to extend on reveal.js
-			dependencies: [
-			{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-			{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-			{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-			{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-			{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-			{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-			]
-		});
+</body>
 
-		</script>
-
-	</body>
-	</html>
+</html>
+>>>>>>> .merge_file_U2rRjS
