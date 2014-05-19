@@ -179,11 +179,7 @@ scope.$watchCollection(obj, listener);
 @@
 ### $watch vs. $watchCollection
 
-<<<<<<< HEAD
 [demo](http://localhost:8001/3.2.3/watch-vs-watchcollection.html)
-=======
-[-> demo](../2-demonstrations/3.2.3/watch-vs-watchcollection.html)
->>>>>>> b576dec85841e8a4488e5be62e4b223caf2e8a05
 
 @@
 ### $eval, $parse, $interpolate
@@ -238,9 +234,9 @@ With track by $index, la directive va r&eacute;utiliser ces noeuds DOM.
 <div>
 ```
 
-[-> demo](../2-demonstrations/3.2.6/1-ng-repeat-simple.html)
+[-> demo](http://localhost:8001/3.2.6/1-ng-repeat-simple.html)
 
-[-> demo tracked](../2-demonstrations/3.2.6/1-ng-repeat-simple-tracked.html)
+[-> demo tracked](http://localhost:8001/3.2.6/1-ng-repeat-simple-tracked.html)
 
 @@
 ### ng-if vs ng-show
@@ -253,9 +249,9 @@ ng-if va plus loin, et ne les cr&eacute;e m&egrave;me pas dans le DOM
 
 Micro optimisation sauf si vous travaillez sur une liste importante.
 
-[-> demo ng-if](../2-demonstrations/3.2.7/ngif.html)
+[-> demo ng-if](http://localhost:8001/3.2.7/ngif.html)
 
-[-> demo ng-show](../2-demonstrations/3.2.7/ngshow.html)
+[-> demo ng-show](http://localhost:8001/3.2.7/ngshow.html)
 
 @@
 ### Filtres
@@ -265,9 +261,9 @@ Ils sont executés à chaque fin de cycle $digest. Ils doivent donc être très 
 A n'appliquer que si nécessaire dans une liste par exemple.
 Ajouter plutôt le resultat du filtre dans la liste avant son affichage.
 
-[-> demo ng-filter](../2-demonstrations/3.2.8/ngfilter.html)
+[-> demo ng-filter](http://localhost:8001/3.2.8/ngfilter.html)
 
-[-> demo ng-filter optimized](../2-demonstrations/3.2.8/ngfilter-optimized.html)
+[-> demo ng-filter optimized](http://localhost:8001/3.2.8/ngfilter-optimized.html)
 
 @@
 ### Mono-binding / once
@@ -296,7 +292,7 @@ Data-binded
 
 Sur une liste de 100 élements  : 101 watchers
 
-[-> demo without-once](../2-demonstrations/3.2.9/without-once.html)
+[-> demo without-once](http://localhost:8001/3.2.9/without-once.html)
 
 Onced
 
@@ -310,4 +306,4 @@ Onced
 
 Sur une liste de 100 élements  : 1 watchers
 
-[-> demo with-once](../2-demonstrations/3.2.9/with-once.html)
+[-> demo with-once](http://localhost:8001/3.2.9/with-once.html)
