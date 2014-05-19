@@ -175,12 +175,29 @@ scope.$watchCollection(obj, listener);
 @@
 ### $watch vs. $watchCollection
 
--> demo
+[demo](http://localhost:8001/3.2.3/watch-vs-watchcollection.html)
 
 @@
 ### $eval, $parse, $interpolate
-@todo wassim
 
+* Attention : $eval appelle $parse
+
+```javascript
+for (var i=0; i<10E100; i+=1){
+  $scope.$eval('expression');
+}
+```
+* Il vaut mieux appeler $parse une fois
+
+```javascript
+var parsedExp = $parse('expression');
+for (var i=0; i<10E10; i+=1){
+  parsedExp($scope);
+}
+```
+* $parse est beaucoup plus rapide que $interpolate
+
+(pour les expressions simples)
 
 @@
 ### directives : compile, link
