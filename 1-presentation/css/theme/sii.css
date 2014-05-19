@@ -33,6 +33,8 @@ body {
 
 .logo-sii {
   margin: 10px;
+  display: inline-block;
+  position: absolute;
 }
 
 ::selection {
