@@ -124,34 +124,6 @@ http://updates.html5rocks.com/2012/11/Respond-to-change-with-Object-observe
 http://addyosmani.com/blog/the-future-of-data-binding-is-object-observe/
 
 @@
-### $digest & $apply & $$postdigest
-
-Micro optimisation
-
-$apply appelle les watchers dans la cha&icirc;ne enti&egrave;re du scope + digest sur la fin...
-
-$digest appelle les watchers dans le scope courant et ses enfants
-
-$$postDigest appelle un callback d&eacute;fini une fois le cycle $digest termin&eacute;
-Il permet par ex de MAJ le dom apr&egrave;s un dirty checking
-
-$$ === private pour Angular
-
-```javascript
-$scope.$$postDigest(function(){
-  console.log("post Digest");
-});
-```
-
-On pr&eacute;f&eacute;re alors la m&eacute;thode $timeout,
-
-```javascript
-$timeout(function(){
- console.log("post Digest with $timeout");
-},0,false);
-```
-
-@@
 ### Surveillez votre
 ## $watch
 
@@ -180,6 +152,34 @@ scope.$watchCollection(obj, listener);
 ### $watch vs. $watchCollection
 
 [demo](http://localhost:8001/3.2.3/watch-vs-watchcollection.html)
+
+@@
+### $digest & $apply & $$postdigest
+
+Micro optimisation
+
+$apply appelle les watchers dans la cha&icirc;ne enti&egrave;re du scope + digest sur la fin...
+
+$digest appelle les watchers dans le scope courant et ses enfants
+
+$$postDigest appelle un callback d&eacute;fini une fois le cycle $digest termin&eacute;
+Il permet par ex de MAJ le dom apr&egrave;s un dirty checking
+
+$$ === private pour Angular
+
+```javascript
+$scope.$$postDigest(function(){
+  console.log("post Digest");
+});
+```
+
+On pr&eacute;f&eacute;re alors la m&eacute;thode $timeout,
+
+```javascript
+$timeout(function(){
+ console.log("post Digest with $timeout");
+},0,false);
+```
 
 @@
 ### $eval, $parse, $interpolate
@@ -248,10 +248,6 @@ ng-if va plus loin, et ne les cr&eacute;e même pas dans le DOM
 	- cr&eacute;e un scope sur l'enfant
 
 Micro optimisation sauf si vous travaillez sur une liste importante.
-
-[-> demo ng-if](http://localhost:8001/3.2.7/ngif.html)
-
-[-> demo ng-show](http://localhost:8001/3.2.7/ngshow.html)
 
 @@
 ### Filtres
