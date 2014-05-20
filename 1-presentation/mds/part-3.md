@@ -99,7 +99,7 @@ ul.addEventListener('click', function(e){
 
 Dirty checking actuel prend en moyenne 40ms par MAJ (Tableau de 20 colonnes, 100 lignes)
 
-On peut aller encore plus loin avec la future sp&eacute;cification Ecmascript, et l'ajout de la m&eacute;thode Observe &agrave; la classe Object.
+On peut aller encore plus loin avec la future sp&eacute;cification ECMAScript, et l'ajout de la m&eacute;thode Observe &agrave; la classe Object.
 Elle permet de recevoir un &eacute;v&egrave;nement de changement d'un objet.
 
 @@
@@ -162,7 +162,7 @@ scope.$watch(watchExpression, listener, true/false);
 * ```watchExpression``` sera exécutée plusieurs fois
 * Deux modes de comparaison
   * FALSE : (par référence)  rapide
-  * TRUE : (profonde) très très lent !!
+  * TRUE : (récursif) très très lent !!
 
 @@
 ### Préférez
@@ -174,7 +174,7 @@ scope.$watchCollection(obj, listener);
 
 * Ajouté en 1.2, utilisé par ```ng-repeat```
 * Un niveau de profondeur
-* Alternative au $watch/true
+* Alternative au $watch récursif
 
 @@
 ### $watch vs. $watchCollection
@@ -242,8 +242,8 @@ With track by $index, la directive va r&eacute;utiliser ces noeuds DOM.
 ### ng-if vs ng-show
 
 ng-show cache les &eacute;l&eacute;ments en CSS - display:none
-	- bindings tjs pr&eacute;sent
-ng-if va plus loin, et ne les cr&eacute;e m&egrave;me pas dans le DOM
+	- bindings toujours pr&eacute;sent
+ng-if va plus loin, et ne les cr&eacute;e même pas dans le DOM
 	- moins de bindings
 	- cr&eacute;e un scope sur l'enfant
 
