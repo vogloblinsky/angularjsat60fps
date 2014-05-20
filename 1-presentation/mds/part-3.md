@@ -216,6 +216,45 @@ for (var i=0; i<10E10; i+=1){
 
 $digest limit&eacute; au scope de la directive
 
+
+@@
+## Exemple
+
+* avant :
+
+```javascript
+app.directive(function(){
+  return {
+    link: function(s,e,a){
+      s.foo = s.$eval(a.foo);
+      s.$watch(a.list, function(list){
+          // votre code ici
+      }, true);
+    }
+  }
+});
+```
+
+* après :
+
+```javascript
+app.directive(function($parse){
+  return {
+    transclude: true,
+    compile: function(e,a){
+      var fooExp = $parse(a.foo), listExp = $parse(a.list);
+      return function link(s,e){
+        s.foo = fooExp(s);
+        s.$watchCollection(listExp, function(list){
+            // votre code ici
+        });
+      }
+    }
+  }
+});
+```
+
+
 @@
 ### ng-repeat : track by $index, pagination
 
