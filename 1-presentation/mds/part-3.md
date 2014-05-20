@@ -1,17 +1,109 @@
 # Optimiser les performances de votre ng-application
 
+@@
 ## SPA classique
 
+@@
+### Mise en cache du DOM
 
+#### Exemple avec jQuery
+* avant :
 
+```javascript
+$('.div').find('span').filter('.cls').each(...);
+//...
+$('.div').find('span').animate(...);
+```
+* aprÃ¨s :
+
+```javascript
+var spans = $('.div').find('span');
+spans.filter('.cls').each(...);
+//...
+spans.animate(...);
+```
+
+@@
+### Manipulation du DOM
+#### Exemple en Vanilla
+* avant :
+
+```javascript
+doc.innerHTML = '<ul>';
+arr.forEach(function(prd){
+    doc.innerHTML += '<li>'+prd+'<li>';
+});
+doc.innerHTML += '</ul>';
+```
+* aprÃ¨s :
+
+```javascript
+var html = '<ul>';
+arr.forEach(function(prd){
+    html += '<li>'+prd+'<li>';
+});
+doc.innerHTML = html + '</ul>';
+```
+
+@@
+### SÃ©lecteurs CSS
+Les sÃ©lecteurs universels sont Ã  proscrire
+```css
+* { color: red; }
+[type="text"] { color: red; }
+```
+
+@@
+### Repaint et reflow
+
+Ã‰viter le reflow et minimiser les repaint
+
+* Redimensionner la fenÃªtre
+* Changer la police
+* Calculer du ```offsetWidth``` et ```offsetHeight```
+* Modifier des attributs de l'objet ```style```
+* ...
+
+@@
+### Gestion correcte des Ã©vÃ¨nements
+* Enregistrement/dÃ©senregistrement systÃ©matique
+
+```javascript
+el.addEventListener('click', fn, false);
+el.removeEventListener('click', fn, false);
+```
+* DÃ©lÃ©gation d'Ã©venements
+
+```javascript
+ul.addEventListener('click', function(e){
+  if( e.target.nodeName === 'LI'){
+    //...
+  }
+}, false);
+```
+* Attention au mousemove/touchmove
+
+@@
+### Quelques ressources
+* http://moduscreate.com/efficient-dom-and-css/
+* https://developers.google.com/speed/articles/javascript-dom
+* https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Writing_efficient_CSS
+* http://www.stubbornella.org/content/2009/03/27/reflows-repaints-css-performance-making-your-javascript-slow/
+* https://developers.google.com/speed/articles/reflow
+
+@@
 ## SPA AngularJS
 
+@@
 ### dirty checking vs. Object.observe
 
 Dirty checking actuel prend en moyenne 40ms par MAJ (Tableau de 20 colonnes, 100 lignes)
 
-On peut aller encore plus loin avec la future spécification Ecmascript, et l'ajout de la méthode Observe à la classe Object. 
-Elle permet de recevoir un évènement de changement d'un objet.
+On peut aller encore plus loin avec la future sp&eacute;cification Ecmascript, et l'ajout de la m&eacute;thode Observe &agrave; la classe Object.
+Elle permet de recevoir un &eacute;v&egrave;nement de changement d'un objet.
+
+@@
+### dirty checking vs. Object.observe
 
 ```javascript
 var beingWatched = {};
@@ -22,24 +114,26 @@ function somethingChanged(changes) {
 Object.observe(beingWatched, somethingChanged);
 ```
 
-Le résultat est très important, 1-2mx par MAj (20x à 40x plus rapide)
+Le r&eacute;sultat est tr&egrave;s important, 1-2ms par MAj (20x &agrave; 40x plus rapide)
 
-Prévu pour la v2, dispo actuellement dans une librairie séparée : watchtower.js écrite en ES6
+Pr&eacute;vu pour la v2, dispo actuellement dans une librairie s&eacute;par&eacute;e : watchtower.js Ã©crite en ES6
 
-Liens : 
+Liens :
 
 http://updates.html5rocks.com/2012/11/Respond-to-change-with-Object-observe
 http://addyosmani.com/blog/the-future-of-data-binding-is-object-observe/
 
+@@
 ### $digest & $apply & $$postdigest
 
 Micro optimisation
 
-$apply appelle les watchers dans la chaîne entière du scope + digest sur la fin...
+$apply appelle les watchers dans la cha&icirc;ne enti&egrave;re du scope + digest sur la fin...
+
 $digest appelle les watchers dans le scope courant et ses enfants
 
-$$postDigest appelle un callback défini une fois le cycle $digest terminé
-Il permet par ex de MAJ le dom après un dirty checking
+$$postDigest appelle un callback d&eacute;fini une fois le cycle $digest termin&eacute;
+Il permet par ex de MAJ le dom apr&egrave;s un dirty checking
 
 $$ === private pour Angular
 
@@ -49,7 +143,7 @@ $scope.$$postDigest(function(){
 });
 ```
 
-On préfère alors la méthode $timeout,
+On pr&eacute;f&eacute;re alors la m&eacute;thode $timeout,
 
 ```javascript
 $timeout(function(){
@@ -57,10 +151,76 @@ $timeout(function(){
 },0,false);
 ```
 
+@@
+### Surveillez votre
+## $watch
+
+```javascript
+scope.$watch(watchExpression, listener, true/false);
+```
+
+* ```watchExpression``` sera exÃ©cutÃ©e plusieurs fois
+* Deux modes de comparaison
+  * FALSE : (par rÃ©fÃ©rence)  rapide
+  * TRUE : (profonde) trÃ¨s trÃ¨s lent !!
+
+@@
+### PrÃ©fÃ©rez
+## $watchCollection
+
+```javascript
+scope.$watchCollection(obj, listener);
+```
+
+* AjoutÃ© en 1.2, utilisÃ© par ```ng-repeat```
+* Un niveau de profondeur
+* Alternative au $watch/true
+
+@@
+### $watch vs. $watchCollection
+
+[demo](http://localhost:8001/3.2.3/watch-vs-watchcollection.html)
+
+@@
+### $eval, $parse, $interpolate
+
+* Attention : $eval appelle $parse
+
+```javascript
+for (var i=0; i<10E100; i+=1){
+  $scope.$eval('expression');
+}
+```
+* Il vaut mieux appeler $parse une fois
+
+```javascript
+var parsedExp = $parse('expression');
+for (var i=0; i<10E10; i+=1){
+  parsedExp($scope);
+}
+```
+* $parse est beaucoup plus rapide que $interpolate
+
+(pour les expressions simples)
+
+@@
+### directives : compile, link
+
+* Pour les directives dÃ©clarÃ©es dans ```ng-repeat```
+   * ```compile``` est appelÃ©e qu'une fois
+   * ```link``` et le constructeur sont appel&eacute;s Ã  chaque itÃ©ration
+* ```compile``` est votre ami
+
+@@
+### directives : transclusion
+
+$digest limit&eacute; au scope de la directive
+
+@@
 ### ng-repeat : track by $index, pagination
 
-Par défaut, ng-repeat crée un noeud DOM par élément, et détruit le noeud quand l'item est supprimé.
-With track by $index, la directive va réutiliser ces noeuds DOM.
+Par d&eacute;faut, ng-repeat cr&eacute;e un noeud DOM par &eacute;l&eacute;ment, et d&eacute;truit le noeud quand l'item est supprim&eacute;.
+With track by $index, la directive va r&eacute;utiliser ces noeuds DOM.
 
 ```javascript
 <div ng-repeat="item in array">
@@ -74,37 +234,53 @@ With track by $index, la directive va réutiliser ces noeuds DOM.
 <div>
 ```
 
--> Demos
+[-> demo](http://localhost:8001/3.2.6/1-ng-repeat-simple.html)
 
+[-> demo tracked](http://localhost:8001/3.2.6/1-ng-repeat-simple-tracked.html)
+
+@@
 ### ng-if vs ng-show
 
-ng-show cache les éléments en CSS - display:none
-	- bindings tjs présent
-ng-if va plus loin, et ne les crée même pas dans le DOM
+ng-show cache les &eacute;l&eacute;ments en CSS - display:none
+	- bindings tjs pr&eacute;sent
+ng-if va plus loin, et ne les cr&eacute;e m&egrave;me pas dans le DOM
 	- moins de bindings
-	- crée un scope sur l'enfant
+	- cr&eacute;e un scope sur l'enfant
 
 Micro optimisation sauf si vous travaillez sur une liste importante.
 
+[-> demo ng-if](http://localhost:8001/3.2.7/ngif.html)
+
+[-> demo ng-show](http://localhost:8001/3.2.7/ngshow.html)
+
+@@
 ### Filtres
 
-Ils sont executés à chaque fin de cycle $digest. Ils doivent donc être très rapides.
+Ils sont executÃ©s Ã  chaque fin de cycle $digest. Ils doivent donc Ãªtre trÃ¨s rapides.
 
-A n'appliquer que si nécessaire dans une liste par exemple.
-Ajouter plutôt le resultat du filtre dans la liste avant son affichage.
+A n'appliquer que si nÃ©cessaire dans une liste par exemple.
+Ajouter plutÃ´t le resultat du filtre dans la liste avant son affichage.
 
+[-> demo ng-filter](http://localhost:8001/3.2.8/ngfilter.html)
+
+[-> demo ng-filter optimized](http://localhost:8001/3.2.8/ngfilter-optimized.html)
+
+@@
 ### Mono-binding / once
 
-Lors de l'utilisation de {{ }}, Angular crée un watch interne pour démarrer le processus de data-binding.
-Le data-binding est 'très' utile si la donnée change au cours du temps, mais si la donnée est en lecture seule, ce n'est plus utile.
+Lors de l'utilisation de {{ }}, Angular cr&eacute;e un watch interne pour d&eacute;marrer le processus de data-binding.
+'TrÃ¨s' utile si la donnÃ©e change au cours du temps, mais si la donnÃ©e est en lecture seule, ce n'est plus utile.
 
-But : allègement des watchers, le cycle de $digest sera plus cours également.
+But : allÃ¨gement des watchers, le cycle de $digest sera plus cours Ã©galement.
 
-Solution : débrancher le watch une fois la donnée affichée.
+Solution : dÃ©brancher le watch une fois la donnÃ©e affichÃ©e.
 
 https://github.com/tadeuszwojcik/angular-once
 
-Exemple :
+@@
+### Mono-binding / once
+
+Data-binded
 
 ```html
 <ul>
@@ -114,7 +290,9 @@ Exemple :
 </ul>
 ```
 
-Sur une liste de 100 élements  : 101 watchers
+Sur une liste de 100 Ã©lements  : 101 watchers
+
+[-> demo without-once](http://localhost:8001/3.2.9/without-once.html)
 
 Onced
 
@@ -126,4 +304,6 @@ Onced
 </ul>
 ```
 
-Sur une liste de 100 élements  : 1 watchers
+Sur une liste de 100 Ã©lements  : 1 watchers
+
+[-> demo with-once](http://localhost:8001/3.2.9/with-once.html)
