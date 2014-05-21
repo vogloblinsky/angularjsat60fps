@@ -101,9 +101,9 @@ ul.addEventListener('click', function(e){
 @@
 ### dirty checking vs. Object.observe
 
-Dirty checking actuel prend en moyenne 40ms par MAJ (ex : tableau de 20 colonnes, 100 lignes)
+Le Dirty checking actuel cherge qui a changé lors d'une action x ou y.
 
-On peut aller encore plus loin avec la future sp&eacute;cification ECMAScript, et l'ajout de la m&eacute;thode Observe &agrave; la classe Object.
+La future sp&eacute;cification ECMAScript avec l'ajout de la m&eacute;thode Observe &agrave; la classe Object bouleverse ce mécanisme.
 Elle permet de recevoir un &eacute;v&egrave;nement de changement d'un objet.
 
 @@
@@ -118,9 +118,9 @@ function somethingChanged(changes) {
 Object.observe(beingWatched, somethingChanged);
 ```
 
-Le r&eacute;sultat est tr&egrave;s important, 1-2ms par MAj (20x &agrave; 40x plus rapide)
+Le r&eacute;sultat est tr&egrave;s important, (20x &agrave; 40x plus rapide par ex)
 
-Pr&eacute;vu pour la v2, dispo actuellement dans une librairie s&eacute;par&eacute;e : watchtower.js écrite en ES6
+Pr&eacute;vu pour la version 2, et disponible actuellement dans une librairie s&eacute;par&eacute;e : watchtower.js écrite en ES6
 
 Object.observe disponible dans Chrome v25 depuis le 21/05/2014 !
 
@@ -163,14 +163,12 @@ scope.$watchCollection(obj, listener);
 @@
 ### $apply & $digest & $$postdigest
 
-Micro optimisation
+- $apply appelle les watchers dans la cha&icirc;ne enti&egrave;re du scope + $digest sur la fin...
 
-$apply appelle les watchers dans la cha&icirc;ne enti&egrave;re du scope + digest sur la fin...
+- $digest appelle les watchers dans le scope courant et ses enfants
 
-$digest appelle les watchers dans le scope courant et ses enfants
-
-$$postDigest appelle un callback d&eacute;fini une fois le cycle $digest termin&eacute;.
-Il permet par ex de MAJ le dom apr&egrave;s un dirty checking
+- $$postDigest appelle un callback d&eacute;fini une fois le cycle $digest termin&eacute;.
+Il permet par exemple de MAJ le dom apr&egrave;s un dirty checking
 
 $$ === private pour Angular
 
@@ -266,7 +264,9 @@ app.directive(function($parse){
 ### ng-repeat : track by $index, pagination
 
 Par d&eacute;faut, ng-repeat cr&eacute;e un noeud DOM par &eacute;l&eacute;ment, et d&eacute;truit le noeud quand l'item est supprim&eacute;.
-With track by $index, la directive va r&eacute;utiliser ces noeuds DOM.
+
+Avec track by $index, la directive va r&eacute;utiliser ces noeuds DOM.
+
 
 ```javascript
 <div ng-repeat="item in array">
@@ -289,7 +289,7 @@ With track by $index, la directive va r&eacute;utiliser ces noeuds DOM.
 
 ng-show cache les &eacute;l&eacute;ments en CSS ( display:none )
 
-- les bindings toujours pr&eacute;sent
+- les bindings sont toujours pr&eacute;sent
 
 
 ng-if va plus loin, et ne les cr&eacute;e même pas dans le DOM
@@ -297,7 +297,9 @@ ng-if va plus loin, et ne les cr&eacute;e même pas dans le DOM
 - moins de bindings
 - crée un scope sur l'enfant
 
-Micro optimisation sauf si vous travaillez sur une liste importante.
+[-> demo ng-show](http://localhost:8001/3.2.7/ngshow.html)
+
+[-> demo ng-if](http://localhost:8001/3.2.7/ngif.html)
 
 @@
 ### Filtres
