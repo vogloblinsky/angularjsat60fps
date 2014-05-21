@@ -157,7 +157,7 @@ scope.$watchCollection(obj, listener);
 [demo](http://localhost:8001/3.2.3/watch-vs-watchcollection.html)
 
 @@
-### $digest & $apply & $$postdigest
+### $apply & $digest & $$postdigest
 
 Micro optimisation
 
