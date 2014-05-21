@@ -81,7 +81,7 @@ ul.addEventListener('click', function(e){
   }
 }, false);
 ```
-* Attention au mousemove/touchmove
+* Attention au mousemove/touchmove, onscroll
 
 @@
 ### Quelques ressources
@@ -97,7 +97,7 @@ ul.addEventListener('click', function(e){
 @@
 ### dirty checking vs. Object.observe
 
-Dirty checking actuel prend en moyenne 40ms par MAJ (Tableau de 20 colonnes, 100 lignes)
+Dirty checking actuel prend en moyenne 40ms par MAJ (ex : tableau de 20 colonnes, 100 lignes)
 
 On peut aller encore plus loin avec la future sp&eacute;cification ECMAScript, et l'ajout de la m&eacute;thode Observe &agrave; la classe Object.
 Elle permet de recevoir un &eacute;v&egrave;nement de changement d'un objet.
@@ -118,8 +118,11 @@ Le r&eacute;sultat est tr&egrave;s important, 1-2ms par MAj (20x &agrave; 40x pl
 
 Pr&eacute;vu pour la v2, dispo actuellement dans une librairie s&eacute;par&eacute;e : watchtower.js écrite en ES6
 
+Object.observe disponible dans Chrome v25 depuis le 21/05/2014 !
+
 Liens :
 
+http://www.html5rocks.com/en/tutorials/es7/observe/
 http://updates.html5rocks.com/2012/11/Respond-to-change-with-Object-observe
 http://addyosmani.com/blog/the-future-of-data-binding-is-object-observe/
 
@@ -162,7 +165,7 @@ $apply appelle les watchers dans la cha&icirc;ne enti&egrave;re du scope + diges
 
 $digest appelle les watchers dans le scope courant et ses enfants
 
-$$postDigest appelle un callback d&eacute;fini une fois le cycle $digest termin&eacute;
+$$postDigest appelle un callback d&eacute;fini une fois le cycle $digest termin&eacute;.
 Il permet par ex de MAJ le dom apr&egrave;s un dirty checking
 
 $$ === private pour Angular
@@ -280,11 +283,15 @@ With track by $index, la directive va r&eacute;utiliser ces noeuds DOM.
 @@
 ### ng-if vs ng-show
 
-ng-show cache les &eacute;l&eacute;ments en CSS - display:none
-	- bindings toujours pr&eacute;sent
+ng-show cache les &eacute;l&eacute;ments en CSS ( display:none )
+
+- les bindings toujours pr&eacute;sent
+
+
 ng-if va plus loin, et ne les cr&eacute;e même pas dans le DOM
-	- moins de bindings
-	- cr&eacute;e un scope sur l'enfant
+
+- moins de bindings
+- crée un scope sur l'enfant
 
 Micro optimisation sauf si vous travaillez sur une liste importante.
 
@@ -304,6 +311,7 @@ Ajouter plutôt le resultat du filtre dans la liste avant son affichage.
 ### Mono-binding / once
 
 Lors de l'utilisation de {{ }}, Angular cr&eacute;e un watch interne pour d&eacute;marrer le processus de data-binding.
+
 'Très' utile si la donnée change au cours du temps, mais si la donnée est en lecture seule, ce n'est plus utile.
 
 But : allègement des watchers, le cycle de $digest sera plus cours également.
