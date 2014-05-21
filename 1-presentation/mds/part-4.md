@@ -14,9 +14,7 @@ http://blog.angularjs.org/2014/03/angular-20.html
 
 @@
 ## Angular + ReactJS
-
-@@
-## MVC
+# MVC
 # M (react) C
 
 @@

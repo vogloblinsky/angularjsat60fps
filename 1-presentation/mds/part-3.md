@@ -10,9 +10,9 @@
 * avant :
 
 ```javascript
-$('.div').find('span').filter('.cls').each(...);
+$('div').find('span').filter('.cls').each(...);
 //...
-$('.div').find('span').animate(...);
+$('div').find('span').animate(...);
 ```
 * après :
 
@@ -51,6 +51,10 @@ Les sélecteurs universels sont à proscrire
 ```css
 * { color: red; }
 [type="text"] { color: red; }
+```
+
+```css
+input[type="text"] { color: red; }
 ```
 
 @@
