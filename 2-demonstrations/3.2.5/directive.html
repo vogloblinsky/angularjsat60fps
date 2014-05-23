@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Directive before</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../common/bootstrap.min.css">
+    <style type="text/css" media="screen">
+      section {
+        display: inline-block;
+        width: 500px;
+        vertical-align: top;
+      }
+      b {
+        display: block;
+      }
+    </style>
+  </head>
+  <body ng-app="demo" ng-controller="AppController">
+    <section>
+      <h4>Directive before</h4>
+      <button class="btn" ng-click="reload(0)">Reload</button> {{t2}}
+      <my-directive-before list="[]" exp="list.push(Math.random())" ng-repeat="item in items[0]"></my-directive-before>
+    </section>
+    <section>
+      <h4>Directive after</h4>
+      <button class="btn" ng-click="reload(1)">Reload</button> {{t2}}
+      <my-directive-after list="[]" exp="list.push(Math.random())" ng-repeat="item in items[1]"></my-directive-after>
+    </section>
+
+    <script src="../common/angular.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

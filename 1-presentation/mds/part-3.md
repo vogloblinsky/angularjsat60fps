@@ -10,9 +10,9 @@
 * avant :
 
 ```javascript
-$('div').find('span').filter('.cls').each(...);
+$('div span .cls').each(...);
 //...
-$('div').find('span').animate(...);
+$('div span').animate(...);
 ```
 * après :
 
@@ -124,6 +124,8 @@ Pr&eacute;vu pour la version 2, et disponible actuellement dans une librairie s&
 
 Object.observe disponible dans Chrome v25 depuis le 21/05/2014 !
 
+@@
+
 Liens :
 
 http://www.html5rocks.com/en/tutorials/es7/observe/
@@ -232,9 +234,7 @@ app.directive(function(){
   return {
     link: function(s,e,a){
       s.foo = s.$eval(a.foo);
-      s.$watch(a.list, function(list){
-          // votre code ici
-      }, true);
+      s.$watch(a.list, function(list){}, true);
     }
   }
 });
@@ -250,15 +250,14 @@ app.directive(function($parse){
       var fooExp = $parse(a.foo), listExp = $parse(a.list);
       return function link(s,e){
         s.foo = fooExp(s);
-        s.$watchCollection(listExp, function(list){
-            // votre code ici
-        });
+        s.$watchCollection(listExp, function(list){});
       }
     }
   }
 });
 ```
 
+<!--[demo](localhost:8001/3.2.5/directive.html)-->
 
 @@
 ### ng-repeat : track by $index, pagination
