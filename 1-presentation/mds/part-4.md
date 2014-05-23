@@ -3,7 +3,7 @@
 @@
 ## Angular 2.0
 
-- evergreen browsers (bye bye IE10/11--)
+- evergreen browsers
 - ES6+
 - Object.observe
 - modularity (lazy-loading)
