@@ -123,7 +123,7 @@ Le r&eacute;sultat est tr&egrave;s important, (20x &agrave; 40x plus rapide par 
 
 Pr&eacute;vu pour la version 2, et disponible actuellement dans une librairie s&eacute;par&eacute;e : watchtower.js écrite en ES6
 
-Object.observe disponible dans Chrome v25 depuis le 21/05/2014 !
+Object.observe disponible dans Chrome v35 depuis le 21/05/2014 !
 
 @@
 
