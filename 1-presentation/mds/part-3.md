@@ -104,6 +104,7 @@ ul.addEventListener('click', function(e){
 Le Dirty checking cherche qui a changé lors d'une action x ou y.
 
 La future sp&eacute;cification ECMAScript avec l'ajout de la m&eacute;thode Observe &agrave; la classe Object bouleverse ce mécanisme.
+
 Elle permet de recevoir un &eacute;v&egrave;nement de changement d'un objet.
 
 @@
@@ -122,7 +123,9 @@ Le r&eacute;sultat est tr&egrave;s important, (20x &agrave; 40x plus rapide par 
 
 Pr&eacute;vu pour la version 2, et disponible actuellement dans une librairie s&eacute;par&eacute;e : watchtower.js écrite en ES6
 
-Object.observe disponible dans Chrome v25 depuis le 21/05/2014 !
+Object.observe disponible dans Chrome v35 depuis le 21/05/2014 !
+
+@@
 
 @@
 
