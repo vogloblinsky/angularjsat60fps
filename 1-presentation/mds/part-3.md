@@ -101,7 +101,7 @@ ul.addEventListener('click', function(e){
 @@
 ### dirty checking vs. Object.observe
 
-Le Dirty checking actuel cherge qui a changé lors d'une action x ou y.
+Le Dirty checking cherche qui a changé lors d'une action x ou y.
 
 La future sp&eacute;cification ECMAScript avec l'ajout de la m&eacute;thode Observe &agrave; la classe Object bouleverse ce mécanisme.
 Elle permet de recevoir un &eacute;v&egrave;nement de changement d'un objet.
