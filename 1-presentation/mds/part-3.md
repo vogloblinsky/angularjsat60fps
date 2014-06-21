@@ -358,3 +358,94 @@ Onced
 Sur une liste de 100 élements  : 1 watchers
 
 [-> demo with-once](http://localhost:8001/3.2.9/with-once.html)
+
+@@
+# Et en prod ?
+
+@@
+### Service $templateCache
+
+```javascript
+angular.module("monApplication").run([$templateCache, function($templateCache) {
+  $templateCache.put("template1.html",
+      // template1.html content (escaped)
+  );
+  $templateCache.put("template2.html",
+      // template2.html content (escaped)
+  );
+  // etc.
+}]);
+```
+
+html
+
+```html
+<div ng-include="'template1.html'"></div>
+```
+
+JavaScript
+
+```javascript
+$templateCache.get('template1.html');
+```
+
+@@
+### Oui, mais je veux l'automatiser !
+
+Installation
+
+```bash
+$ npm install gulp-angular-templatecache --save-dev
+```
+
+Gulpfile.js
+
+```javascript
+var templateCache = require('gulp-angular-templatecache');
+gulp.task('default', function () {
+  gulp.src('templates/**/*.html')
+    .pipe(templateCache())
+    .pipe(gulp.dest('public'));
+});
+```
+
+public/templates.js 
+
+```javascript
+angular.module("templates").run([$templateCache, function($templateCache) {
+  $templateCache.put("template1.html",
+      // template1.html content (escaped)
+  );
+  $templateCache.put("template2.html",
+      // template2.html content (escaped)
+  );
+  // etc.
+}]);
+```
+
+@@
+### Minification, Concaténation, ...
+
+
+Gulp à la rescousse !
+
+
+```javascript
+gulp.task('build', function () {
+  return gulp.src('app/js/**/*.js')
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('default'))
+
+    .pipe(concat('app.js'))
+    .pipe(ngmin())
+    .pipe(gulp.dest('app/dist/js'))
+    .pipe(rename({suffix: '.min'}))
+
+    .pipe(uglify())
+    .pipe(gulp.dest('app/dist/js'))
+
+    .pipe(notify({ message: 'Build task completed' }))
+
+    .on('error', gutil.log);
+});
+```
